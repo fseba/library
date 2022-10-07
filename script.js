@@ -54,8 +54,13 @@ function addCards(library) {
  
   const container = document.querySelector('.cardContainer'); 
 
+  if (container.children.namedItem(book.title)) {
+    return; 
+  };
+
   const card = document.createElement('div');
-  card.classList.add('card', `${book.title}`);
+  card.classList.add('card');
+  card.id = book.title;
 
   const cardTitle = document.createElement('div');
   cardTitle.textContent = `Title: ${book.title}`;
