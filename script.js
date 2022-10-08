@@ -1,10 +1,4 @@
-let book = new Book("Book1", "Bob", 35, "read");
-let book2 = new Book("Book2", "Bob2", 356, "not read yet");
-let book3 = new Book("Book3", "Bob3", 355, "not read yet");
-let book4 = new Book("Book4", "Bob4", 345, "read");
-
-let myLibrary = [book];
-
+//Book object
 function Book(title, author, pages, readStatus) {
   this.title = title,
   this.author = author,
@@ -17,8 +11,11 @@ Book.prototype.info =  function() {
 };
 
 
+//myLibrary array as storage for the book objects
+let myLibrary = [];
+
 function addBookToLibrary(library, book) {
-  if (!book) {
+  if (!book) { //to prevent undefined "books" from being pushed into the array  
     return;
   };
 
@@ -26,6 +23,7 @@ function addBookToLibrary(library, book) {
 }
 
 
+//create new book objects based on the form input 
 function createNewBook() {
   let bookTitle = document.getElementById('title').value;
   let bookAuthor = document.getElementById('author').value;
@@ -43,18 +41,13 @@ function createNewBook() {
 }
 
 
-let button = document.getElementsByTagName('button')[0];
-button.addEventListener('click', () => {
-  addBookToLibrary(myLibrary, createNewBook()); 
-}); 
-
-
-function addCards(library) {
+//publish items of the library on the page
+function publishCards(library) {
   library.forEach(book => {
  
   const container = document.querySelector('.cardContainer'); 
 
-  if (container.children.namedItem(book.title)) {
+  if (container.children.namedItem(book.title)) { //prevent duplicate published cards
     return; 
   };
 
@@ -81,4 +74,22 @@ function addCards(library) {
 
   container.appendChild(card); 
   });
+}
+
+
+//button to add new books to the library and publish the cards on the page
+let button = document.querySelector('.submitButton');
+button.addEventListener('click', () => {
+  addBookToLibrary(myLibrary, createNewBook()); 
+  publishCards(myLibrary);
+}); 
+
+
+//change the visibility of the fieldset 
+const toggleButton = document.querySelector('.newBookButton'); 
+toggleButton.addEventListener('click', toggleInputForm);
+
+function toggleInputForm() {
+  const fieldset = document.querySelector('fieldset');
+  fieldset.hidden = fieldset.hidden ? false : true; 
 }
