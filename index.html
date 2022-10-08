@@ -10,9 +10,10 @@
 </head>
 <body>
   <main>
+    <button class="newBookButton">New book</button>
     <fieldset>
+      <legend>Add book to library</legend>
       <form id="form" action="" onsubmit="return false">
-        <legend>Add book to library</legend>
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" required>
         <label for="author">Author:</label>
@@ -23,7 +24,7 @@
         <label for="readStatus-Read">Read</label>
         <input type="radio" name="readStatus" id="readStatus-NotRead" value="not read yet" required>
         <label for="readStatus-NotRead">Not read</label>
-        <button type="submit">Add book</button>
+        <button type="submit" class="submitButton">Add book</button>
       </form>
     </fieldset>
     <div class="cardContainer">
