@@ -22,6 +22,19 @@ function addBookToLibrary(library, book) {
   library.push(book); 
 }
 
+function deleteBookFromLibrary(library, bookTitle) {
+  //get index of book
+  let indexBook; 
+  library.forEach((book, index) => {
+    if (book.title === bookTitle) {
+    indexBook = index; 
+    };
+  });
+  //splice book out
+  library.splice(indexBook, 1); 
+}
+
+
 
 //create new book objects based on the form input 
 function createNewBook() {
