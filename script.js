@@ -83,7 +83,10 @@ function publishCards(library) {
   const cardDeleteButton = document.createElement('button');
   cardDeleteButton.textContent = 'Delete Card';
   cardDeleteButton.classList.add('card-deleteButton');
-  cardDeleteButton.addEventListener('click', (e) => deleteBookFromLibrary(myLibrary, e.target.parentElement.id));
+  cardDeleteButton.addEventListener('click', (e) => {
+    deleteBookFromLibrary(myLibrary, e.target.parentElement.id);
+    deleteCard(e.target.parentElement.id); 
+  });
 
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
@@ -93,6 +96,10 @@ function publishCards(library) {
 
   container.appendChild(card); 
   });
+}
+
+function deleteCard(bookTitle) {
+  document.getElementById(bookTitle).remove();
 }
 
 
