@@ -50,7 +50,7 @@ function createNewBook() {
 
   form.reset();
   
-  return new Book(bookTitle, bookAuthor, bookPages, bookReadStatus)
+  return new Book(bookTitle, bookAuthor, bookPages, bookReadStatus);
 }
 
 
@@ -80,10 +80,16 @@ function publishCards(library) {
   const cardReadStatus = document.createElement('div');
   cardReadStatus.textContent = `Read status: ${book.readStatus}`;
 
+  const cardDeleteButton = document.createElement('button');
+  cardDeleteButton.textContent = 'Delete Card';
+  cardDeleteButton.classList.add('card-deleteButton');
+  cardDeleteButton.addEventListener('click', (e) => deleteBookFromLibrary(myLibrary, e.target.parentElement.id));
+
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
   card.appendChild(cardReadStatus);
+  card.appendChild(cardDeleteButton); 
 
   container.appendChild(card); 
   });
