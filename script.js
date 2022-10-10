@@ -10,6 +10,13 @@ Book.prototype.info =  function() {
   return `${this.title} by ${this.author}, ${this.pages}, ${this.readStatus}`;
 };
 
+Book.prototype.toggleReadStatus = function() {
+  this.readStatus === 'read' ? this.readStatus = 'not read' : this.readStatus = 'read';
+
+  const card = document.getElementById(`${this.title}`);
+  card.childNodes[3].innerText = `Read status: ${this.readStatus}`;
+}
+
 
 //myLibrary array as storage for the book objects
 let myLibrary = [];
@@ -88,11 +95,26 @@ function publishCards(library) {
     deleteCard(e.target.parentElement.id); 
   });
 
+  const toggleStatusButton = document.createElement('button');
+  toggleStatusButton.textContent = 'Toggle Read Status';
+  toggleStatusButton.classList.add('card-toggleReadStatusButton');
+  toggleStatusButton.addEventListener('click', (e) => {
+    //get index of book
+    let indexBook; 
+    library.forEach((book, index) => {
+      if (book.title === e.target.parentElement.id) {
+      indexBook = index; 
+      };
+    });
+    myLibrary[indexBook].toggleReadStatus();
+  });
+
   card.appendChild(cardTitle);
   card.appendChild(cardAuthor);
   card.appendChild(cardPages);
   card.appendChild(cardReadStatus);
   card.appendChild(cardDeleteButton); 
+  card.appendChild(toggleStatusButton);
 
   container.appendChild(card); 
   });
