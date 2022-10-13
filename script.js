@@ -17,9 +17,16 @@ Book.prototype.toggleReadStatus = function() {
   card.childNodes[3].innerText = `Read status: ${this.readStatus}`;
 }
 
+//dummy books
+let book0 = new Book('The-Principles-of-Object-Oriented-JavaScript', 'Nicholas C. Zakas', 122, 'read');
+let book1 = new Book('Introduction to Networking', 'Dr. Chuck', 172, 'read');
+let book2 = new Book('Clean Code', 'Robert C. Martin', 462, 'not read');
 
 //myLibrary array as storage for the book objects
-let myLibrary = [];
+let myLibrary = [book0, book1, book2];
+
+//load dummy book 
+window.onload = publishCards(myLibrary);
 
 function addBookToLibrary(library, book) {
   if (!book) { //to prevent undefined "books" from being pushed into the array  
@@ -27,6 +34,8 @@ function addBookToLibrary(library, book) {
   };
 
   library.push(book); 
+  toggleInputForm();
+  blur();
 }
 
 function deleteBookFromLibrary(library, bookTitle) {
@@ -135,9 +144,17 @@ button.addEventListener('click', () => {
 
 //change the visibility of the fieldset 
 const toggleButton = document.querySelector('.newBookButton'); 
-toggleButton.addEventListener('click', toggleInputForm);
+toggleButton.addEventListener('click', () => {
+  toggleInputForm();
+  blur();
+});
 
 function toggleInputForm() {
   const fieldset = document.querySelector('fieldset');
   fieldset.hidden = fieldset.hidden ? false : true; 
+}
+
+function blur() {
+  const container = document.getElementsByClassName('cardContainer')[0];
+  container.classList.toggle('blur');
 }
